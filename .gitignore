@@ -1,0 +1,52 @@
+# Configuration files with sensitive data
+public/api/config.php
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+error_log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Environment files
+.env
+.env.local
+
+# Node modules (if ever needed)
+node_modules/
+
+# Build files (if ever needed)
+dist/
+build/
+
+# Test files
+coverage/
+.phpunit.result.cache
+
+# FTP deployment files
+.ftpconfig
+sftp-config.json
+
+# Session files
+sessions/
+tmp/
