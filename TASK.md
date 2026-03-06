@@ -123,8 +123,11 @@
   - [ ] Success/error message containers
 
 - [ ] Create contact form
-  - [ ] Name input field (required)
+  - [ ] Vorname (First name) input field (required)
+  - [ ] Name (Last name) input field (required)
   - [ ] Email input field (required)
+  - [ ] Mobilfunknummer (Mobile number) input field (required)
+  - [ ] Mentor input field (required)
   - [ ] DSGVO checkbox 1: Privacy policy (required)
   - [ ] DSGVO checkbox 2: Email marketing consent (required)
   - [ ] Honeypot field (hidden, for bot detection)
@@ -173,8 +176,11 @@
 
 #### JavaScript (js/form.js)
 - [ ] Form validation (client-side)
-  - [ ] Validate name (min 2 chars)
+  - [ ] Validate Vorname (min 2 chars)
+  - [ ] Validate Name (min 2 chars)
   - [ ] Validate email (RFC 5322)
+  - [ ] Validate Mobilfunknummer (German mobile format)
+  - [ ] Validate Mentor (min 2 chars)
   - [ ] Validate checkboxes (both required)
   - [ ] Show inline error messages
   - [ ] Prevent submission if invalid
@@ -246,8 +252,11 @@
 
 #### Form Handler (api/submit.php)
 - [ ] Input validation (server-side)
-  - [ ] Validate name (trim, min 2 chars, max 100 chars)
+  - [ ] Validate Vorname (trim, min 2 chars, max 100 chars)
+  - [ ] Validate Name (trim, min 2 chars, max 100 chars)
   - [ ] Validate email (filter_var, RFC 5322)
+  - [ ] Validate Mobilfunknummer (German mobile format)
+  - [ ] Validate Mentor (trim, min 2 chars, max 100 chars)
   - [ ] Validate checkboxes (both must be true)
   - [ ] Validate honeypot (must be empty)
   - [ ] Sanitize all inputs (htmlspecialchars)
@@ -572,6 +581,16 @@
 
 ## 📝 Notes
 
+### 2026-03-06
+- Client provided logo files (SVG without background, PNG with white background)
+- Font: The Seasons (serif typeface) - 6 OTF files extracted and placed in public/assets/fonts/
+- Domain: teammehrwert.info (IONOS)
+- Email: Office@teammehrwert.info
+- Form fields updated: Vorname, Name, Email, Mobilfunknummer, Mentor
+- Design: Clean, minimalist
+- Access: Private link only (not publicly posted)
+- Brevo account not yet created by client
+
 ### 2026-03-04
 - Created PLANNING.md with complete architecture
 - Started TASK.md creation
@@ -586,11 +605,12 @@
 - **PHP Only:** IONOS doesn't support Node.js, so pure PHP backend
 
 ### Questions for Client
-- [ ] Do you want double opt-in email verification?
+- [x] Do you want double opt-in email verification? **No - private link access only**
 - [ ] What should the email sequence contain? (we can use placeholders initially)
-- [ ] Do you have Brevo account already, or should we create one?
+- [ ] Do you have Brevo account already, or should we create one? **Not yet created**
 - [ ] What are the exact details for Impressum? (name, address, contact)
 - [ ] Do you want analytics tracking?
+- [ ] What is the purpose of the "Mentor" field? (for email personalization or segmentation?)
 
 ---
 

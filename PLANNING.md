@@ -12,10 +12,17 @@
 ## 📋 Project Overview
 
 ### Purpose
-A static landing page with PHP contact form that collects user email addresses and triggers an automated email sequence (3-5 emails) via Brevo API integration. Users receive a unique link to access the page.
+A static landing page with PHP contact form that collects user information and triggers an automated email sequence (3-5 emails) via Brevo API integration. Users receive a unique link to access the page.
+
+### Client Information
+- **Domain**: teammehrwert.info (IONOS)
+- **Email**: Office@teammehrwert.info
+- **Access**: Link shared privately within team (not publicly posted)
+- **Design**: Clean, minimalist design
+- **Font**: The Seasons (serif typeface)
 
 ### Customer Requirements
-> "We want to send a link to users where they can register and then receive emails at regular intervals. Initially 3-5 automated emails, then maybe monthly. We don't need any other functionality. Do we also need an imprint, etc.? We already have a domain and an email address."
+> "Die Landingpage mit dem Formular zum Eintragen soll möglichst clean gehalten werden. Website wird nur per Link in unser Team weitergeleitet. Da brauchen wir glaube nicht mehr. Der Link wird nicht öffentlich gepostet."
 
 ### Key Features
 1. **Static Landing Page** - Simple, clean design
@@ -95,8 +102,16 @@ email_sequence/
 │   │   └── config.example.php # Config template
 │   │
 │   └── assets/
-│       ├── images/            # Images
-│       └── fonts/             # Fonts (if needed)
+│       ├── images/            # Logo files
+│       │   ├── logo_alpha.svg # Logo without background
+│       │   └── logo_white_bg.png # Logo with white background
+│       └── fonts/             # The Seasons font family (6 OTF files)
+│           ├── fonnts.com-theseasons-reg.otf
+│           ├── fonnts.com-theseasons-lt.otf
+│           ├── fonnts.com-theseasons-bd.otf
+│           ├── fonnts.com-theseasons-it.otf
+│           ├── fonnts.com-theseasons-ltit.otf
+│           └── fonnts.com-theseasons-bdit.otf
 │
 ├── tests/                      # Unit tests (optional)
 │   └── test_form.php
@@ -164,8 +179,11 @@ Reference project: `/home/nop/CascadeProjects/CRM-Funnel-Prototype-main`
 ```
 
 ### Typography
-- **Headings**: System font stack (clean, fast)
-- **Body**: System font stack
+- **Primary Font**: The Seasons (serif typeface)
+  - Available in 6 styles: Regular, Light, Bold, Italic, Light Italic, Bold Italic
+  - Self-hosted OTF files in `public/assets/fonts/`
+- **Headings**: The Seasons Regular/Bold
+- **Body**: The Seasons Light/Regular
 - **Font Sizes**: Responsive (clamp() for fluid typography)
 
 ---
@@ -235,8 +253,8 @@ Email 5: Follow-up (Day 14) - Optional
 // config.php
 define('BREVO_API_KEY', 'your-api-key-here');
 define('BREVO_LIST_ID', 2); // Your list ID
-define('BREVO_SENDER_EMAIL', 'noreply@yourdomain.com');
-define('BREVO_SENDER_NAME', 'Your Company Name');
+define('BREVO_SENDER_EMAIL', 'Office@teammehrwert.info');
+define('BREVO_SENDER_NAME', 'Team Mehrwert');
 ```
 
 ---
@@ -278,10 +296,10 @@ define('BREVO_SENDER_NAME', 'Your Company Name');
 // config.php (not in git)
 define('BREVO_API_KEY', 'xkeysib-...');
 define('BREVO_LIST_ID', 2);
-define('BREVO_SENDER_EMAIL', 'noreply@domain.com');
-define('BREVO_SENDER_NAME', 'Company Name');
-define('SITE_URL', 'https://yourdomain.com');
-define('ENABLE_DOUBLE_OPT_IN', false); // true or false
+define('BREVO_SENDER_EMAIL', 'Office@teammehrwert.info');
+define('BREVO_SENDER_NAME', 'Team Mehrwert');
+define('SITE_URL', 'https://teammehrwert.info');
+define('ENABLE_DOUBLE_OPT_IN', false); // Not required - private link access only
 ```
 
 ### Testing Checklist
