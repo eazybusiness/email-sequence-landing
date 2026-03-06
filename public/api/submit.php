@@ -4,28 +4,10 @@
  * Handles contact form submissions and adds contacts to Brevo
  */
 
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
+require_once 'config.php';
 
 // Set JSON response header
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-
-// Check if config file exists
-if (!file_exists('config.php')) {
-    http_response_code(500);
-    echo json_encode([
-        'success' => false,
-        'error' => 'Configuration file missing',
-        'debug' => ['message' => 'config.php not found']
-    ]);
-    exit;
-}
-
-require_once 'config.php';
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -124,6 +106,17 @@ $email = htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
 $mobilfunknummer = htmlspecialchars($mobilfunknummer, ENT_QUOTES, 'UTF-8');
 $mentor = htmlspecialchars($mentor, ENT_QUOTES, 'UTF-8');
 
+// Check if curl is available
+if (!function_exists('curl_init')) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Server configuration error',
+        'debug' => ['message' => 'cURL extension not available']
+    ]);
+    exit;
+}
+
 // Add contact to Brevo
 try {
     $brevo_data = [
@@ -173,6 +166,24 @@ try {
         
         http_response_code(500);
         echo json_encode([
+            'success' => false,
+            'error' => 'Es gab ein Problem bei der Anmeldung. Bitte versuchen Sie es später erneut.',
+            'debug' => [
+                'http_code' => $http_code,
+                'brevo_error' => $error_message
+            ]
+        ]);
+    }
+
+} catch (Exception $e) {
+    error_log("Exception in submit.php: " . $e->getMessage());
+    
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.'
+    ]);
+}
             'success' => false,
             'error' => 'Es gab ein Problem bei der Anmeldung. Bitte versuchen Sie es später erneut.',
             'debug' => [
