@@ -4,10 +4,28 @@
  * Handles contact form submissions and adds contacts to Brevo
  */
 
-require_once 'config.php';
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 
 // Set JSON response header
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+
+// Check if config file exists
+if (!file_exists('config.php')) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Configuration file missing',
+        'debug' => ['message' => 'config.php not found']
+    ]);
+    exit;
+}
+
+require_once 'config.php';
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
