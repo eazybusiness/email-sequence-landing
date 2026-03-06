@@ -144,13 +144,23 @@ try {
             'message' => 'Vielen Dank für Ihre Anmeldung! Sie erhalten in Kürze eine E-Mail von uns.'
         ]);
     } else {
-        // Log error
-        error_log("Brevo API Error: HTTP $http_code - $response");
+        // Log detailed error
+        error_log("Brevo API Error: HTTP $http_code");
+        error_log("Response: $response");
+        error_log("Request data: " . json_encode($brevo_data));
+        
+        // Parse error response
+        $error_data = json_decode($response, true);
+        $error_message = isset($error_data['message']) ? $error_data['message'] : 'Unknown error';
         
         http_response_code(500);
         echo json_encode([
             'success' => false,
-            'error' => 'Es gab ein Problem bei der Anmeldung. Bitte versuchen Sie es später erneut.'
+            'error' => 'Es gab ein Problem bei der Anmeldung. Bitte versuchen Sie es später erneut.',
+            'debug' => [
+                'http_code' => $http_code,
+                'brevo_error' => $error_message
+            ]
         ]);
     }
 
