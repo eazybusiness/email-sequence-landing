@@ -8,12 +8,16 @@
    Font Face Declarations
    ======================================== */
 
+/* The Seasons font has rendering issues with special characters and umlauts
+   Using system font stack for better compatibility */
+
 @font-face {
   font-family: 'The Seasons';
   src: url('../assets/fonts/fonnts.com-theseasons-reg.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A; /* Only basic Latin letters */
 }
 
 @font-face {
@@ -22,6 +26,7 @@
   font-weight: 300;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A; /* Only basic Latin letters */
 }
 
 @font-face {
@@ -30,30 +35,7 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-}
-
-@font-face {
-  font-family: 'The Seasons';
-  src: url('../assets/fonts/fonnts.com-theseasons-it.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'The Seasons';
-  src: url('../assets/fonts/fonnts.com-theseasons-ltit.otf') format('opentype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'The Seasons';
-  src: url('../assets/fonts/fonnts.com-theseasons-bdit.otf') format('opentype');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A; /* Only basic Latin letters */
 }
 
 /* ========================================
@@ -72,7 +54,8 @@
   --color-border: #e5e7eb;       /* Gray 200 */
   
   /* Typography */
-  --font-family: 'The Seasons', Georgia, serif;
+  --font-family: 'The Seasons', 'Georgia', 'Times New Roman', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, serif;
+  --font-family-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   --font-size-base: 16px;
   --line-height-base: 1.6;
   
@@ -121,6 +104,8 @@ body {
   background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: normal;
+  font-variant-ligatures: normal;
 }
 
 /* ========================================
@@ -176,6 +161,13 @@ a:hover {
   color: var(--color-primary);
 }
 
+/* Use fallback font for special characters */
+.form-label .text-red-500,
+.form-checkbox label,
+p.text-sm {
+  font-family: var(--font-family-fallback);
+}
+
 .form-input {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -187,6 +179,7 @@ a:hover {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   transition: all var(--transition-base);
+  font-feature-settings: normal;
 }
 
 .form-input:focus {
@@ -335,6 +328,15 @@ a:hover {
   height: 1px;
   opacity: 0;
   pointer-events: none;
+}
+
+/* ========================================
+   Special Character Handling
+   ======================================== */
+
+/* Use system font for asterisks and special characters to avoid rendering issues */
+.text-red-500 {
+  font-family: var(--font-family-fallback) !important;
 }
 
 /* ========================================
