@@ -1,5 +1,7 @@
 # Configuration files with sensitive data
 public/api/config.php
+api/config.php
+BREVO_API_KEY.txt
 
 # IDE files
 .vscode/

@@ -28,7 +28,18 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './public'
+          path: '.'
+          exclude: |
+            .git
+            .github
+            public
+            tests
+            docs
+            PLANNING.md
+            TASK.md
+            README.md
+            CONTRIBUTING.md
+            PROJECT_STATUS.md
       
       - name: Deploy to GitHub Pages
         id: deployment
